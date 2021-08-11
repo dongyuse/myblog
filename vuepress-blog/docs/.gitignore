@@ -1,8 +1,8 @@
 pids
 logs
 node_modules
-docs/.vuepress/theme
-docs/.vuepress/dist
+src/.vuepress/theme
+src/.vuepress/dist
 npm-debug.log
 coverage/
 run
