@@ -36,7 +36,7 @@ npm run deploy
 输入
 ``` js
 ---
-title: Blogging Like a Hacker
+title: Blogging Like a Hacker  //文章标题，放弃通过一级目录定义标题的方式，改在 Front Matter 中定义。
 lang: en-US
 ---
 ```
@@ -79,6 +79,9 @@ VuePress 提供了一种添加额外样式的简便方法。你可以创建一�
   font-size 30px
 }
 ```
+::: tip 为什么不能把 `palette.styl` 和 `index.styl` 合并到一个 API?
+不可以将颜色与样式写在同一个文件中，VuePress 会先解析 `palette.styl` 中的全局变量，之后作用于主题的各个样式中，最后才解析 `index.styl` ，以覆盖主题默认的样式。
+:::
 ## Markdown常用语法
 ### 1、标题
 说明：#后面跟的内容就是标题，一个#就是一级标题，有几个#就是几级标题，例如2级标题就有两个##，markdown的2级和3级标题会默认自动作为子目录，注意：#后面必须有个空格，然后再跟内容，否则#就是普通字符。<br/>
@@ -454,8 +457,8 @@ yarn add -D sass-loader node-sass
 - 有时，你可以只想在当前页面应用一些 JavaScript 或者 CSS，在这种情况下，你可以直接在 Markdown 文件中使用原生的 `<script>` 或者 `<style>` 标签，它们将会从编译后的 HTML 文件中提取出来，并作为生成的 Vue 单文件组件的 `<script>` 和 `<style>` 标签。
 
 输入
-``` js
-<p class="item1">这个块是被内联的脚本渲染的，样式也采用了内联样式。</p>
+``` html
+<p class="item1"></p>
 <style>
     .item1{
         padding: 1rem 1.5rem;
@@ -464,10 +467,12 @@ yarn add -D sass-loader node-sass
         color: #41b883;
     }
 </style>
+<script>
+    document.querySelector('.item1').textContent = '这个块是被内联的脚本渲染的，样式也采用了内联样式。'
+</script>
 ```
 输出<br/>
-<p class="item1">这个块是被内联的脚本渲染的，样式也采用了内联样式。</p>
-
+<p class="item1"></p>
 <style>
     .item1{
         padding: 1rem 1.5rem;
@@ -476,6 +481,9 @@ yarn add -D sass-loader node-sass
         color: #41b883;
     }
 </style>
+<script>
+    document.querySelector('.item1').textContent = '这个块是被内联的脚本渲染的，样式也采用了内联样式。'
+</script>
 <style lang="sass">
   .title
     font-size: 20px
